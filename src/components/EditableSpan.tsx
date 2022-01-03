@@ -1,0 +1,33 @@
+import React, { ChangeEvent } from "react";
+
+type EditableSpanType = {
+    title: string
+    onChange: (title: string) => void
+}
+
+function EditableSpan(props: EditableSpanType) {
+    let [editMode, setEditMode] = React.useState(false)
+    let [title, setTitle] = React.useState('')
+
+    const activeEditMode = () => {
+        setEditMode(true)
+        setTitle(props.title)
+    }
+    const activeViewMode = () => {
+        setEditMode(false)
+        props.onChange(title)
+    }
+    const onChangeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.currentTarget.value)
+    }
+
+    return (editMode
+            ? <input onBlur={activeViewMode} value={title} autoFocus
+            onChange={onChangeTitleHandler}
+            /> // при использовании инпута всегда должен быть параметр autoFocus
+            : <span onDoubleClick={activeEditMode}>{props.title}</span>
+    )
+
+}
+
+export default EditableSpan;
