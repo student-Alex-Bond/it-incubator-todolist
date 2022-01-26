@@ -28,8 +28,7 @@ export function AddItemForm(props: AddItemFormType) {
         props.addItem(newTaskTitle.trim());//метод trim() обрезает пробелы в начале и конце стороки
         setNewTaskTitle("");
 
-        {/*очищение поля инпута setNewTaskTitle("") */
-        }
+        /*очищение поля инпута setNewTaskTitle("") */
 
     }
 
