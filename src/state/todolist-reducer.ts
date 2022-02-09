@@ -38,9 +38,7 @@ export type ActionsTypes =
 export let todoListId1 = v1()
 export let todoListId2 = v1()
 
-const initialState: Array<TodoListsType> = [
-    {id: todoListId1, title: 'What to learn', filter: 'all'},
-    {id: todoListId2, title: 'What to buy', filter: 'all'}]
+const initialState: Array<TodoListsType> = []
 
 
 export const todoListReducer = (state: Array<TodoListsType> = initialState, action: ActionsTypes): Array<TodoListsType> => {
@@ -56,21 +54,28 @@ export const todoListReducer = (state: Array<TodoListsType> = initialState, acti
             }, ...state]
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            const todoList = state.find(todoList => todoList.id === action.id)
-            if (todoList) {
-                todoList.title = action.title
-            }
-            return [...state]
+            // const todoList = state.find(todoList => todoList.id === action.id)
+            // if (todoList) {
+            //     todoList.title = action.title
+            // }
+            // return [...state]
+            return state.map(tl => tl.id === action.id
+                ? {...tl, title: action.title} : tl)
         }
         case 'CHANGE-TODOLIST-FILTER': {
-            const todoList = state.find(todoList => todoList.id === action.id)
-            if (todoList) {
-                todoList.filter = action.filter
-            }
-            return [...state]
+            // const todoList = state.find(todoList => todoList.id === action.id)
+            // if (todoList) {
+            //     todoList.filter = action.filter
+            // }
+            //return [...state,]
+            return state.map(
+                (tl) => tl.id === action.id
+                    ? {...tl, filter: action.filter}
+                    : tl
+            )
         }
         default:
-           return state
+            return state
     }
 }
 

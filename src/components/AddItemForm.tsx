@@ -1,13 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import { IconButton, TextField} from "@material-ui/core";
+import {IconButton, TextField} from "@material-ui/core";
 import {ControlPoint} from "@material-ui/icons";
 
-type AddItemFormType = {
+type AddItemForm = {
     addItem: (newTaskTitle: string) => void
 
 }
 
-export function AddItemForm(props: AddItemFormType) {
+export const AddItemForm = React.memo((props: AddItemForm) =>  {
     const [newTaskTitle, setNewTaskTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
@@ -15,7 +15,9 @@ export function AddItemForm(props: AddItemFormType) {
         setNewTaskTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
         if (e.charCode === 13 && newTaskTitle.trim() !== '') {
             props.addItem(newTaskTitle);
             setNewTaskTitle("");
@@ -41,13 +43,13 @@ export function AddItemForm(props: AddItemFormType) {
             <TextField variant={"outlined"} error={!!error} value={newTaskTitle}
                        onChange={onChangeHandler}
                        onKeyPress={onKeyPressHandler}
-                       label ={ "Type value "}
+                       label={"Type value "}
                        helperText={error}
             />
             <IconButton onClick={addTask} color={"primary"}>
-                <ControlPoint  />
+                <ControlPoint/>
             </IconButton>
 
         </div>
     )
-}
+})
