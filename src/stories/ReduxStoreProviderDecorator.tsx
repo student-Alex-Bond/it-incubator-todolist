@@ -2,17 +2,17 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {combineReducers, createStore} from 'redux'
 import {tasksReducer} from '../state/tasks-reducer'
-import {todoListReducer as todolistsReducer} from '../state/todolist-reducer'
+import {todoListReducer as todoListsReducer} from '../state/todolist-reducer'
 import {v1} from 'uuid'
 import { AppRootState } from '../state/store'
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todoLists: todoListsReducer
 })
 
-const initialGlobalState = {
-    todolists: [
+const initialGlobalState: AppRootState  = {
+    todoLists: [
         {id: "todolistId1", title: "What to learn", filter: "all"},
         {id: "todolistId2", title: "What to buy", filter: "all"}
     ] ,

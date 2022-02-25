@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 //     tasks: TaskStateType
 // } описание типов в ручную
 
-export type AppRootState = ReturnType<typeof rootReducer> // автоматически typescript выводит типы на основе возврашаемого значения функции rootReducer
+export type AppRootState = ReturnType<typeof store.getState> // автоматически typescript выводит типы на основе возврашаемого значения функции rootReducer
 
 export const store = createStore(rootReducer)
 
