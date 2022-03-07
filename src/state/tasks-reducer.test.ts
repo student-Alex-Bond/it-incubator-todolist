@@ -1,7 +1,7 @@
 import {TaskStateType} from '../AppWithRedux';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
 
-import {addTodolistAC, removeTodolistAC} from "./todolist-reducer";
+import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolist-reducer";
 import {TaskPriorities, TasksStatuses} from "../api/todoLists-api";
 
 let startState: TaskStateType = {}
@@ -116,4 +116,23 @@ test('property with todolistId should be deleted', () => {
     const keys = Object.keys(endState);
     expect(keys.length).toBe(1);
     expect(endState["todolistId2"]).toBeUndefined();
+});
+
+test('empty arrays should be added wgen we set todolists', () => {
+
+ const action = setTodolistsAC([
+     {id: '1', title: 'title 1', order: 0, addedDate: ''},
+     {id: '2', title: 'title 2', order: 0, addedDate: ''}
+ ])
+
+    const endState = tasksReducer({}, action)
+
+    const keys = Object.keys(endState)
+
+    expect(keys.length).toBe(2)
+    expect(endState['1']).toStrictEqual([])
+    expect(endState['2']).toStrictEqual([])
+
+
+
 });
