@@ -22,7 +22,7 @@ type PropsType = {
     changeTaskTitle: (taskId: string, title: string, todoListId: string) => void
     filter: FilterValuesType
     removeTodoList: (todoListId: string) => void
-    changeTodoListTitle: (title: string, id: string) => void
+    changeTodoListTitle: (id: string, title: string ) => void
 }
 
 export const TodoList = React.memo((props: PropsType) => {
@@ -69,7 +69,7 @@ export const TodoList = React.memo((props: PropsType) => {
     }
 
     const changeTodoListTitle = useCallback((title: string) => {
-        props.changeTodoListTitle(title, props.id)
+        props.changeTodoListTitle(props.id, title )
     }, [props.changeTodoListTitle, props.id])
 
 
