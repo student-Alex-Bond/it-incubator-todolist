@@ -1,5 +1,5 @@
 import React from 'react'
-import AppWithRedux from "../AppWithRedux";
+import AppWithRedux from "../components/App/AppWithRedux";
 import {Meta, Story} from '@storybook/react/types-6-0'
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
@@ -10,7 +10,7 @@ export default {
     argTypes: {},
 } as Meta
 
-const Template: Story = (args) => <AppWithRedux {...args}/>
+const Template: Story = (args) => <AppWithRedux demo={true} {...args}/>
 
 export const AppWithReduxExample = Template.bind({})
 AppWithReduxExample.args={}

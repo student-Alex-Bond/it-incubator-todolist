@@ -1,4 +1,4 @@
-import {Task} from "../components/Task";
+import {Task} from "../features/Todolists/Todolist/Task/Task";
 import React from "react";
 import {action} from '@storybook/addon-actions'
 import {TaskPriorities, TasksStatuses} from "../api/todoLists-api";

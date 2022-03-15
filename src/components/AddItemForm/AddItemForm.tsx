@@ -4,10 +4,10 @@ import {ControlPoint} from "@material-ui/icons";
 
 type AddItemForm = {
     addItem: (newTaskTitle: string) => void
-
+    disabled?: boolean
 }
 
-export const AddItemForm = React.memo((props: AddItemForm) =>  {
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemForm) => {
     const [newTaskTitle, setNewTaskTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
@@ -19,7 +19,7 @@ export const AddItemForm = React.memo((props: AddItemForm) =>  {
             setError(null)
         }
         if (e.charCode === 13 && newTaskTitle.trim() !== '') {
-            props.addItem(newTaskTitle);
+            addItem(newTaskTitle);
             setNewTaskTitle("");
         }
     }
@@ -27,7 +27,7 @@ export const AddItemForm = React.memo((props: AddItemForm) =>  {
         if (newTaskTitle.trim() === '') {
             return setError('Title is required')
         }
-        props.addItem(newTaskTitle.trim());//метод trim() обрезает пробелы в начале и конце стороки
+        addItem(newTaskTitle.trim());//метод trim() обрезает пробелы в начале и конце стороки
         setNewTaskTitle("");
 
         /*очищение поля инпута setNewTaskTitle("") */
@@ -41,12 +41,13 @@ export const AddItemForm = React.memo((props: AddItemForm) =>  {
             {/*       onKeyPress={onKeyPressHandler}*/}
             {/*/>*/}
             <TextField variant={"outlined"} error={!!error} value={newTaskTitle}
+                       disabled={disabled}
                        onChange={onChangeHandler}
                        onKeyPress={onKeyPressHandler}
                        label={"Type value "}
                        helperText={error}
             />
-            <IconButton onClick={addTask} color={"primary"}>
+            <IconButton onClick={addTask} color={"primary"} disabled={disabled}>
                 <ControlPoint/>
             </IconButton>
 

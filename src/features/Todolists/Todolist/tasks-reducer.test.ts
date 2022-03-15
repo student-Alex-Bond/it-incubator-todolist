@@ -1,15 +1,14 @@
-import {TaskStateType} from '../AppWithRedux';
+import {TaskStateType} from '../../../components/App/AppWithRedux';
 import {
     addTaskAC,
     updateTaskAC,
-    changeTaskTitleAC,
     removeTaskAC,
     setTasksAC,
     tasksReducer
 } from './tasks-reducer';
 
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolist-reducer";
-import {TaskPriorities, TasksStatuses} from "../api/todoLists-api";
+import {TaskPriorities, TasksStatuses} from "../../../api/todoLists-api";
 
 let startState: TaskStateType = {}
 
@@ -129,16 +128,6 @@ test('status of specified task should be changed', () => {
     expect(endState["todolistId2"][1].status).toBe(TasksStatuses.New);
 });
 
-test('title of specified task should be changed', () => {
-
-
-    const action = changeTaskTitleAC("coffee", '2', "todolistId2");
-
-    const endState = tasksReducer(startState, action)
-
-    expect(endState["todolistId2"][1].title).toBe("coffee");
-    expect(endState["todolistId1"][1].title).toBe("JS");
-});
 
 test('property with todolistId should be deleted', () => {
 
