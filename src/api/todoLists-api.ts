@@ -34,10 +34,23 @@ export const todoListsApi = {
         return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
     },
     createTask(todolistID: string, taskTitle: string) {
-        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistID}/tasks/`, {title: taskTitle})
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks/`, {title: taskTitle})
     },
     updateTask(todolistID: string, taskID: string, model: UpdateTaskType) {
         return instance.put<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`, model)
+    }
+}
+
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
+export const authAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<ResponseType<{userId?: number}>>('auth/login', data)
     }
 }
 
