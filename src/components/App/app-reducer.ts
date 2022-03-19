@@ -1,8 +1,12 @@
+import { Dispatch } from "redux"
+import {authAPI} from "../../api/todoLists-api";
+import {setIsLoggedIn, setIsLoggedInType} from "../../features/Login/auth-reducer";
 
 
 const initialState: InitialStateType = {
     status: "idle",
-    error: null
+    error: null,
+    isInitialized: false
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
@@ -11,6 +15,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {...state, status: action.status}
         case 'APP/SET-ERROR':
             return {...state, error: action.error}
+        case "APP/SET-IS-INITIALIZED":
+            return {...state, isInitialized: action.value}
         default:
             return {...state}
     }
@@ -18,16 +24,28 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 
 export const setAppErrorAC = (error: string | null) =>  ({type: 'APP/SET-ERROR', error} as const)
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
+export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
 
 
-type ActionType = SetAppErrorType | SetAppStatusType
+export const initializeAppTC = () => (dispatch : Dispatch<ActionType>) => {
+authAPI.me().then(res => {
+    if(res.data.resultCode === 0){
+        dispatch(setIsLoggedIn(true))
+    }
+    dispatch(setAppInitializedAC(true))
+})
+}
+
+type ActionType = SetAppErrorType | SetAppStatusType | SetInitializedType | setIsLoggedInType
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type InitialStateType = {
     status: RequestStatusType,
-    error: string | null
+    error: string | null,
+    isInitialized: boolean
 }
 
+export type SetInitializedType = ReturnType<typeof setAppInitializedAC>
 export type SetAppErrorType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusType = ReturnType<typeof setAppStatusAC>

@@ -1,7 +1,13 @@
 import {v1} from "uuid";
 import {todoListsApi, TodolistType} from "../../../api/todoLists-api";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, SetAppStatusType} from "../../../components/App/app-reducer";
+import {
+    RequestStatusType,
+    SetAppErrorType,
+    setAppStatusAC,
+    SetAppStatusType
+} from "../../../components/App/app-reducer";
+import {handleServerNetworkError} from "../../../utils/error-utils";
 
 const initialState: Array<TodolistsDomainType> = []
 
@@ -88,6 +94,8 @@ export const fetchTodolistsTC = () => {
         todoListsApi.getTodoList().then((res) => {
             dispatch(setTodolistsAC(res.data))
             dispatch(setAppStatusAC('succeeded'))
+        }).catch((error) => {
+            handleServerNetworkError(error, dispatch)
         })
     }
 }
@@ -143,5 +151,5 @@ export type TodolistsDomainType = TodolistType & {
     entityStatus: RequestStatusType
 }
 
-type ThunkDispatchType = Dispatch<ActionsTypes | SetAppStatusType>
+type ThunkDispatchType = Dispatch<ActionsTypes | SetAppStatusType | SetAppErrorType>
 
