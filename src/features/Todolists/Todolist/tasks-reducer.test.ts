@@ -61,13 +61,34 @@ test('correct task should be deleted from correct array', () => {
 
     expect(endState).toEqual({
         "todolistId1": [
-            {id: "1", title: "CSS", isDone: false},
-            {id: "2", title: "JS", isDone: true},
-            {id: "3", title: "React", isDone: false}
+            {
+                id: "1", title: "CSS", status: TasksStatuses.New, todoListId: "todolistId1",
+                addedDate: '', startDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                deadline: ''
+            },
+            {
+                id: "2", title: "JS", status: TasksStatuses.Completed, todoListId: "todolistId1",
+                addedDate: '', startDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                deadline: ''
+            },
+            {
+                id: "3", title: "React", status: TasksStatuses.New, todoListId: "todolistId1",
+                addedDate: '', startDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                deadline: ''
+            }
         ],
         "todolistId2": [
-            {id: "1", title: "bread", isDone: false},
-            {id: "3", title: "tea", isDone: false}
+            {
+                id: "1", title: "bread", status: TasksStatuses.New, todoListId: "todolistId2",
+                addedDate: '', startDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                deadline: ''
+            },
+
+            {
+                id: "3", title: "tea", status: TasksStatuses.New, todoListId: "todolistId2",
+                addedDate: '', startDate: '', order: 0, priority: TaskPriorities.Low, description: '',
+                deadline: ''
+            }
         ]
     });
 
