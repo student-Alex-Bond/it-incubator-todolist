@@ -69,7 +69,7 @@ function AppWithRedux({demo = false}: AppWithReduxType) {
                 </AppBar>
                 <Container fixed>
                     <Routes>
-                        <Route path={'/'} element={<TodolistsList demo={demo}/>}/>
+                        <Route path={'/'} element={<TodolistsList demo={demo} />} />
                         <Route path={'/login'} element={<Login/>}/>
                     </Routes>
                     {/*<TodolistsList demo={demo}/>*/}
