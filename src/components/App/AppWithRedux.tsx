@@ -17,7 +17,7 @@ import {ErrorSnackbar} from "../ErrorSnackBar/ErrorSnackBar";
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootState} from "./store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import {Login} from "../../features/Login/Login";
 import { logoutTC } from '../../features/Login/auth-reducer';
 
@@ -52,7 +52,7 @@ function AppWithRedux({demo = false}: AppWithReduxType) {
     }
 
     return (
-        <BrowserRouter>
+
             <div className="App">
                 <AppBar position={'static'}>
                     <Toolbar>
@@ -75,7 +75,7 @@ function AppWithRedux({demo = false}: AppWithReduxType) {
                     {/*<TodolistsList demo={demo}/>*/}
                 </Container>
             </div>
-        </BrowserRouter>
+
     );
 
 }

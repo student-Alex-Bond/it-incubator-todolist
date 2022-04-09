@@ -8,11 +8,14 @@ import {AppRootState} from '../components/App/store'
 import {TaskPriorities, TasksStatuses} from "../api/todoLists-api";
 import {appReducer} from "../components/App/app-reducer";
 import thunk from "redux-thunk";
+import {authReducer} from "../features/Login/auth-reducer";
+import { HashRouter} from 'react-router-dom'
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todoLists: todoListsReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer,
 })
 
 const initialGlobalState: AppRootState = {
@@ -61,4 +64,11 @@ export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider
         store={storyBookStore}>{storyFn()}
     </Provider>)
+export const HashRouterDecorator = (storyFn: any) => (
+    <HashRouter>
+        {storyFn()}
+    </HashRouter>)
+
+
+
 

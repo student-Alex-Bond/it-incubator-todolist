@@ -20,7 +20,7 @@ test('correct error message should be set', () => {
 })
 
 test('correct status should be set', () => {
-    const endState = appReducer(startState, setAppStatusAC({status: 'loading'}))
+    const endState = appReducer(startState, setAppStatusAC({status: 'loading'} ))
 
     expect(endState.error).toBe(null)
     expect(endState.status).toBe("loading")

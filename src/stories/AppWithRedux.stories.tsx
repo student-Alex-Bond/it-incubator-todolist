@@ -1,12 +1,13 @@
 import React from 'react'
 import AppWithRedux from "../components/App/AppWithRedux";
 import {Meta, Story} from '@storybook/react/types-6-0'
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
+import {HashRouterDecorator, ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
+
 
 export default {
     title: 'My Stories/AppWithRedux',
     component: AppWithRedux,
-    decorators: [ReduxStoreProviderDecorator],
+    decorators: [ReduxStoreProviderDecorator, HashRouterDecorator],
     argTypes: {},
 } as Meta
 
